@@ -1,0 +1,64 @@
+%        File: project_proposal_tthompson.tex
+%     Created: Tue Oct 21 08:00 PM 2014 E
+% Last Change: Tue Oct 21 08:00 PM 2014 E
+%     Handy hints for vim-latex-suite: http://vim-latex.sourceforge.net/documentation/latex-suite/auc-tex-mappings.html
+%     Character list for math: http://www.artofproblemsolving.com/Wiki/index.php/LaTeX:Symbols
+%
+\documentclass[a4paper]{article}
+\usepackage{fullpage}
+\usepackage{amsmath,amsfonts,amsthm}
+\usepackage{enumerate}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+% these are compressed lists to help fit into a 1 page limit
+\newenvironment{enumerate*}%
+  {\vspace{-2ex} \begin{enumerate} %
+     \setlength{\itemsep}{-1ex} \setlength{\parsep}{0pt}}%
+  {\end{enumerate}}
+ 
+\newenvironment{itemize*}%
+  {\vspace{-2ex} \begin{itemize} %
+     \setlength{\itemsep}{-1ex} \setlength{\parsep}{0pt}}%
+  {\end{itemize}}
+ 
+\newenvironment{description*}%
+  {\vspace{-2ex} \begin{description} %
+     \setlength{\itemsep}{-1ex} \setlength{\parsep}{0pt}}%
+  {\end{description}}
+
+\DeclareMathOperator*{\E}{\mathbb{E}}
+\let\Pr\relax
+\DeclareMathOperator*{\Pr}{\mathbb{P}}
+
+\newcommand{\inprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\eqdef}{\mathbin{\stackrel{\rm def}{=}}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\author{Thomas Ben Thompson}
+\title{CS224 Project proposal - Distributed hierarchical spatial decomposition}
+\begin{document}
+\maketitle
+
+Hierarchical space partitioning (HSP) is an essential step in many geometric algorithms, like exact nearest neighbors, collision detection, or generalized n-body problems. I propose to study the distributed parallel construction and use of HSP methods for the n-body problem.
+
+Classically, the n-body problem was researched in astrophysics to study the dynamics of gravitation in the galaxy. In my research, I translate the partial differential equations describing the behavior of fault systems in the Earth's crust into a convolution over the boundary of the domain -- a boundary integral equation. EQUATIONS. Then, by representing each integral as the sum of a number of carefully placed points, quadrature methods convert an integral equation into an n-body problem. The difficulty with this method is that naive algorithms for n-body problems require $O(n^2)$ time, because each particle must interact with each other particle. Approximate $O(n)$ or $O(n\log{n})$ time methods have been developed by approximating the far-field interactions. These methods are generally called ``fast'' n-body solvers. Fast n-body solvers necessarily use some hierarchical spatial decomposition (normally octrees) in order determine which interactions are in the far-field and which interactions are in the near-field. 
+
+Why distribute the data structure?
+
+Strong and weak scaling
+
+Ball trees and median finding. 
+
+MPI vs Actors
+
+Data replication across nodes
+
+Comparison between kd-trees, ball trees, octrees, sliding-midpoint kdtrees.
+
+What else?
+\end{document}
+
+

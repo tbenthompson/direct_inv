@@ -1,0 +1,6 @@
+** O(N) methods for direct dense low-rank matrix inversion
+-- start by writing some lu decomposition code
+-- then write python code to create the sparsified representation for a treecode
+-- then try operating on that directly.
+-- levels of abstraction can be re-inserted later
+

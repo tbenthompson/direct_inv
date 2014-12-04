@@ -1,0 +1,31 @@
+\begin{thebibliography}{1}
+
+\bibitem{Ambikasaran2014}
+Sivaram Ambikasaran and Eric Darve.
+\newblock {The inverse fast multipole method}.
+\newblock {\em arXiv preprint}, pages 1--25, 2014.
+
+\bibitem{Cruse1969}
+TA~Cruse.
+\newblock {Numerical solutions in three dimensional elastostatics}.
+\newblock {\em International Journal of Solids and Structures}, 5:1259--1274,
+  1969.
+
+\bibitem{Greengard1987}
+L~Greengard and V~Rokhlin.
+\newblock {A fast algorithm for particle simulations}.
+\newblock {\em Journal of Computational Physics}, 348:325--348, 1987.
+
+\bibitem{Greengard2009}
+Leslie Greengard, Denis Gueyffier, Per-Gunnar Martinsson, and Vladimir Rokhlin.
+\newblock {\em {Fast direct solvers for integral equations in complex
+  three-dimensional domains}}, volume~18.
+\newblock May 2009.
+
+\bibitem{Martinsson2005}
+P.G. Martinsson and V.~Rokhlin.
+\newblock {A fast direct solver for boundary integral equations in two
+  dimensions}.
+\newblock {\em Journal of Computational Physics}, 205(1):1--23, May 2005.
+
+\end{thebibliography}

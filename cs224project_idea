@@ -1,0 +1,14 @@
+Design and implement algorithmically sound octree space decomposition that preserves bounding surfaces.
+
+Study the hierarchical space decomposition used in fast multipole methods, showing that some forms of
+trees have improved M2L or P2P counts.
+
+Parallel median finding
+-- kind of boring
+-- exact, approximate, linear time, sublinear probabalistic, GPU, distributed, etc
+http://www.cc.gatech.edu/~bader/papers/JPDC-Bad04.pdf
+
+http://www.new-npac.org/users/fox/pdftotal/sccs-0743.pdf
+http://arxiv.org/pdf/1104.2732.pdf
+http://highperformancegraphics.org/previous/www_2011/media/Papers/HPG2011_Papers_Monroe.pdf
+http://delivery.acm.org/10.1145/2350000/2345676/a4_2-alabi.pdf?ip=140.247.105.71&id=2345676&acc=ACTIVE%20SERVICE&key=C82FBC3DCC335AD2%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&CFID=438806372&CFTOKEN=72215393&__acm__=1412727451_9f3df39290dd620070500503bcd36e0c
