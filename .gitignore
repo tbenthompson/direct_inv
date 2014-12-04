@@ -1,0 +1,5 @@
+src/eigen
+*.swp
+*.o
+src/test
+.deps

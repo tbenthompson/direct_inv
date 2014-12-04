@@ -1,6 +1,10 @@
 from fabricate import *
 
-sources = ['test']
+sources = ['test', 'eval']
+
+cpp_flags = '-Wall -std=c++11'.split()
+cpp_flags.append('-I./eigen')
+link_flags = []
 
 def build():
     compile()
@@ -8,7 +12,7 @@ def build():
 
 def compile():
     for source in sources:
-        run('g++', '-c', source+'.cpp')
+        run('g++', '-c', source+'.cpp', cpp_flags)
 
 def link():
     objects = [s+'.o' for s in sources]
