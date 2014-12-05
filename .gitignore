@@ -1,5 +1,6 @@
-src/eigen
 *.swp
 *.o
 src/test
+src/bench
+src/eigen
 .deps

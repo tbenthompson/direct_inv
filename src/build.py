@@ -1,8 +1,9 @@
 from fabricate import *
 
-sources = ['test', 'eval']
+test_sources = ['test', 'eval']
+bench_sources = ['bench', 'eval']
 
-cpp_flags = '-Wall -std=c++11'.split()
+cpp_flags = '-Wall -std=c++11 -O3 -DDEBUG'.split()
 cpp_flags.append('-I./eigen')
 link_flags = []
 
@@ -11,12 +12,16 @@ def build():
     link()
 
 def compile():
-    for source in sources:
+    for source in test_sources:
+        run('g++', '-c', source+'.cpp', cpp_flags)
+    for source in bench_sources:
         run('g++', '-c', source+'.cpp', cpp_flags)
 
 def link():
-    objects = [s+'.o' for s in sources]
-    run('g++', '-o', 'test', objects)
+    test_objects = [s+'.o' for s in test_sources]
+    bench_objects = [s+'.o' for s in bench_sources]
+    run('g++', '-o', 'test', test_objects)
+    run('g++', '-o', 'bench', bench_objects)
 
 def clean():
     autoclean()

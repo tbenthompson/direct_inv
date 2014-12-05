@@ -1,23 +1,32 @@
+#include <iostream>
 #include "eval.h"
+#include "tree.h"
 
-std::vector<double> dense_matrix(const std::vector<double>& locs, Kernel kernel)
+using Eigen::MatrixXd; 
+using Eigen::VectorXd; 
+using Eigen::SparseMatrix;
+
+MatrixXd dense_matrix(const VectorXd& locs, Kernel kernel)
 {
     int n_locs = locs.size();
-    std::vector<double> matrix(n_locs * n_locs);
+    MatrixXd mat(n_locs, n_locs);
     for (int i = 0; i < n_locs; i++) {
         for (int j = 0; j < n_locs; j++) {
-            int entry = i * n_locs + j;
             if (i == j) {
-                matrix[entry] = 0;
+                mat(i,j) = 0;
             } else {
-                matrix[entry] = kernel(locs[i], locs[j]); 
+                mat(i,j) = kernel(locs[i], locs[j]); 
             }
         }
     }
-    return matrix;
+    return mat;
 }
 
-std::vector<double> solve_system(const std::vector<double>& A,
-                                 const std::vector<double>& b) {
+VectorXd solve_system(const Eigen::MatrixXd& A, const Eigen::VectorXd& b) {
+    VectorXd res = A.partialPivLu().solve(b);
+    return res;
+}
 
+SparseMatrix<double> build_P2P(const Tree& t) {
+    /* SparseMatrix<double> p2p( */
 }
