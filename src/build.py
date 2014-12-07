@@ -3,7 +3,7 @@ from fabricate import *
 test_sources = ['test', 'eval']
 bench_sources = ['bench', 'eval']
 
-cpp_flags = '-Wall -std=c++11 -O3 -DDEBUG'.split()
+cpp_flags = '-Wall -std=c++11 -Og -DDEBUG'.split()
 cpp_flags.append('-I./eigen')
 link_flags = []
 

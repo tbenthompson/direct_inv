@@ -17,6 +17,8 @@
               << time_ms\
               << "ms.\n";
 
+Kernel dist_kernel = [](double x, double y) {return 1 / std::fabs(x - y);};
+
 
 void bench_eigenlu() {
     int n = 2500;
@@ -36,7 +38,42 @@ void bench_treeconstruct() {
     TOC("Tree construct on " + std::to_string(n) + " points")
 }
 
+void bench_treeeval() {
+    int n_pts = 100000;
+    auto pts = random_list(n_pts);
+    auto t = Tree(pts, -1, (int)(std::log(n_pts) / std::log(2)));
+    auto tmat = TreecodeMatrix(dist_kernel, t, 5.0);
+    TIC;
+    tmat.P2P_M2P(); 
+    TOC("P2P,M2P");
+    TIC2;
+    tmat.P2M_M2M();
+    TOC("P2M,M2M");
+    tmat.build_matrix();
+
+    auto vec = to_eigen(random_list(n_pts));
+    TIC2;
+    auto est = tmat.eval(vec);
+    TOC("Eval");
+}
+
+void bench_tree_invert() {
+    int n_pts = 1000;
+    auto pts = random_list(n_pts);
+    auto t = Tree(pts, -1, 9);
+    auto tmat = TreecodeMatrix(dist_kernel, t, 5.0);
+    tmat.P2P_M2P(); 
+    tmat.P2M_M2M();
+    tmat.build_matrix();
+
+    TIC
+    tmat.invert();
+    TOC("Invert treecode");
+}
+
 int main() {
     bench_eigenlu();
     bench_treeconstruct();
+    bench_treeeval();
+    bench_tree_invert();
 }

@@ -11,6 +11,7 @@ struct Cell {
     double min_pos;
     double max_pos;
     double width;
+    double center;
 
     int begin_idx;
     int end_idx;
@@ -27,9 +28,10 @@ struct Tree {
         max_depth(max_depth)
     {
         std::sort(elements.begin(), elements.end());
-        double min_pos = elements[0];
-        double max_pos = elements[elements.size() - 1];
-        Cell root = {0, min_pos, max_pos, max_pos - min_pos,
+        double eps = 1e-6;
+        double min_pos = elements[0] - eps;
+        double max_pos = elements[elements.size() - 1] + eps;
+        Cell root = {0, min_pos, max_pos, max_pos - min_pos, (max_pos + min_pos) / 2,
                      0, (int)elements.size(), {-1, -1}};
         if ((int)elements.size() <= max_per_cell || max_depth > 0) {
             root.children = build_children(root);
@@ -45,26 +47,21 @@ struct Tree {
         double min_pos = cell.min_pos + i * (cell.width / 2);
         double max_pos = cell.min_pos + (i + 1) * (cell.width / 2);
 
-        int begin_idx = cell.begin_idx;
-        int end_idx = cell.end_idx;
-        if (i == 0) {
-            for (int j = begin_idx; j < end_idx; j++) {
-                if (elements[j] > max_pos) {
-                    end_idx = j;
-                    break;
-                }
+        int begin_idx = cell.end_idx;
+        int end_idx = cell.begin_idx;
+        for (int j = cell.begin_idx; j < cell.end_idx; j++) {
+            if (elements[j] <= max_pos) {
+                end_idx = std::max(j + 1, end_idx);
             }
-        } else {
-            for (int j = begin_idx; j < end_idx; j++) {
-                if (elements[j] > min_pos) {
-                    begin_idx = j;
-                    break;
-                }
+        }
+        for (int j = cell.begin_idx; j < cell.end_idx; j++) {
+            if (elements[j] >= min_pos) {
+                begin_idx = std::min(j, begin_idx);
             }
         }
 
-        Cell child = {cell.depth + 1, min_pos, max_pos, (max_pos - min_pos), 
-                      begin_idx, end_idx, {-1, -1}}; 
+        Cell child = {cell.depth + 1, min_pos, max_pos, (max_pos - min_pos),
+                      (max_pos + min_pos) / 2, begin_idx, end_idx, {-1, -1}}; 
         if (end_idx - begin_idx > max_per_cell && max_depth > child.depth) {
             child.children = build_children(child);
         }
@@ -72,8 +69,12 @@ struct Tree {
         return cells.size() - 1;
     }
 
+    int root_index() const {
+        return cells.size() - 1;
+    }
+
     Cell root() {
-        return cells[cells.size() - 1];
+        return cells[root_index()];
     }
 
     std::vector<double> elements;
